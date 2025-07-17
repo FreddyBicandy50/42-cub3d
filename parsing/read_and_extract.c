@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   read_and_extract.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adahroug <adahroug@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 19:52:52 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/06 20:25:34 by adahroug         ###   ########.fr       */
+/*   Updated: 2025/07/17 16:06:12 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	open_map(t_data *p)
 {
