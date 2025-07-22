@@ -1,4 +1,8 @@
 # Compiler and flags
+GREEN=\033[0;32m
+RED=\033[0;31m
+RESET=\033[0m
+
 CC      = cc
 CFLAGS  = -Wall -Wextra -Werror -Iincludes -Iminilibx-linux
 
@@ -11,21 +15,25 @@ MLX_LIB = $(MLX_DIR)/libmlx.a
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # Source files (manually listed)
-SRC = main.c \
+SRCS = main.c \
+	engine/window.c \
+	\
 	libft/libft.c \
-	libft/libft.utils.c \
 	libft/split.c \
+	libft/libft.utils.c \
+	\
 	parsing/parsing.c \
 	parsing/map_parsing.c \
+	parsing/map_checker.c \
 	parsing/color_parsing.c \
 	parsing/parsing_utils.c \
-	parsing/map_checker.c \
 	parsing/read_and_extract.c \
-	utils/directions.c \
-	utils/copy_2darray.c \
+	\
+	utils/utils.c \
 	utils/colors.c \
 	utils/flood_fill.c \
-	utils/utils.c
+	utils/directions.c \
+	utils/copy_2darray.c\
 
 OBJ = $(SRCS:.c=.o)
 
@@ -40,9 +48,13 @@ $(MLX_LIB):
 clean:
 	rm -rf $(OBJ)
 	$(MAKE) -C $(MLX_DIR) clean
+	@clear
+	@echo "${GREEN}Objects Complied Successfully${RESET}"
 
 fclean: clean
 	rm -f $(NAME)
+	@clear
+	@echo "$(RED)Objects Cleaned Successfully$(RESET)"
 
 re: fclean all
 

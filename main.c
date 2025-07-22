@@ -6,11 +6,12 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:57:40 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/17 16:05:30 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/07/18 11:50:44 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
+
 
 int	main(int argc, char **argv)
 {
@@ -28,6 +29,7 @@ int	main(int argc, char **argv)
 	p->map_filename = ft_strdup(argv[1]);
 	parse_map(p);
 	free_allocated(p);
+	engine_start(p);
 	return (0);
 }
 

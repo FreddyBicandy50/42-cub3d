@@ -6,22 +6,42 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:57:51 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/17 16:44:46 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/07/18 14:55:06 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <../.minilibx-linux/mlx.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+
 # define BUFFER_SIZE 1024
+# define HEIGHT 1080
+# define WIDTH 1920
+
+typedef struct s_matrix
+{
+	int		width;
+	int		height;
+	int		**matrix;
+}			t_matrix;
 
 typedef struct s_data
 {
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		color;
+
 	char	*north_filename;
 	char	*south_filename;
 	char	*west_filename;
@@ -49,21 +69,25 @@ typedef struct s_data
 	int		set;
 }			t_data;
 
+// engine
+void		engine_start(t_data *data);
+
 // libft
-char		*ft_strjoin(char *s1, char *s2);
-char		**ft_split(char *s, char c);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+char		*ft_substr(char *s, unsigned int start, size_t len);
 char		*word_dup(const char *str, int start, int finish);
 int			count_words(const char *str, char c);
-char		*ft_strdup(char *str);
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-int			ft_strlen(char *str);
-void		ft_strcpy(char *dest, char *src);
-char		*ft_substr(char *s, unsigned int start, size_t len);
-int			ft_atoi(const char *nptr);
-int			ft_strcmp(char *s1, char *s2);
-int			ft_isdigit(int c);
-char		*ft_strrchr(char *s, int c);
 char		*ft_strchr(const char *s, int c);
+void		ft_strcpy(char *dest, char *src);
+char		*ft_strjoin(char *s1, char *s2);
+int			ft_strcmp(char *s1, char *s2);
+char		*ft_strrchr(char *s, int c);
+char		**ft_split(char *s, char c);
+int			ft_atoi(const char *nptr);
+char		*ft_strdup(char *str);
+int			ft_strlen(char *str);
+int			ft_isdigit(int c);
+
 // parsing
 void		parse_map(t_data *p);
 int			open_map(t_data *p);
