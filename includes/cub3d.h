@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:57:51 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/18 14:55:06 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:41:19 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define CUB3D_H
 
 # include <../.minilibx-linux/mlx.h>
+# include <X11/keysym.h>
 # include <fcntl.h>
+# include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -37,10 +39,14 @@ typedef struct s_data
 	void	*win_ptr;
 	void	*img_ptr;
 	char	*addr;
+	double	player_dir;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 	int		color;
+
+	double	player_x;
+	double	player_y;
 
 	char	*north_filename;
 	char	*south_filename;
