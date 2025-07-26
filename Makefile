@@ -16,28 +16,30 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # Source files (manually listed)
 SRCS = main.c \
-	engine/window.c \
+	game/window.c \
+	game/render.c \
 	\
 	libft/libft.c \
 	libft/split.c \
 	libft/libft.utils.c \
 	\
 	parsing/parsing.c \
-	parsing/map_parsing.c \
 	parsing/map_checker.c \
-	parsing/color_parsing.c \
+	parsing/map_parsing.c \
 	parsing/parsing_utils.c \
+	parsing/color_parsing.c \
 	parsing/read_and_extract.c \
 	\
+	utils/init.c \
 	utils/utils.c \
 	utils/colors.c \
 	utils/flood_fill.c \
 	utils/directions.c \
-	utils/copy_2darray.c\
+	utils/copy_2darray.c \
 
 OBJ = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: $(NAME) clean
 
 $(NAME): $(MLX_LIB) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) -o $(NAME)

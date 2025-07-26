@@ -6,12 +6,28 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:57:40 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/18 11:50:44 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/07/26 17:44:42 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
+void	cub3d_controls(void)
+{
+	printf(BRIGHT_RED "\n");
+	printf("░█▀▀░█▀█░█▀█░▀█▀░█▀▄░█▀█░█░░░█▀▀\n");
+	printf("░█░░░█░█░█░█░░█░░█▀▄░█░█░█░░░▀▀█\n");
+	printf("░▀▀▀░▀▀▀░▀░▀░░▀░░▀░▀░▀▀▀░▀▀▀░▀▀▀\n");
+	printf(RESET "\n");
+	printf(YELLOW "\tW" RESET ": move forward\t");
+	printf(YELLOW "\tS" RESET ": move backward\n");
+	printf(YELLOW "\tA" RESET ": strafe left\t");
+	printf(YELLOW "\tD" RESET ": strafe right\n");
+	printf(YELLOW "\t<" RESET ": rotate left\t");
+	printf(YELLOW "\t>" RESET ": rotate right\n");
+	printf("\n");
+	return ;
+}
 
 int	main(int argc, char **argv)
 {
@@ -28,32 +44,10 @@ int	main(int argc, char **argv)
 	initialize_struct(p);
 	p->map_filename = ft_strdup(argv[1]);
 	parse_map(p);
+	create_window(p);
+	init_textures(p);
+	cub3d_controls();
+	rendering(p);
 	free_allocated(p);
-	engine_start(p);
 	return (0);
-}
-
-void	initialize_struct(t_data *p)
-{
-	p->ceiling_color = NULL;
-	p->floor_color = NULL;
-	p->north_filename = NULL;
-	p->east_filename = NULL;
-	p->west_filename = NULL;
-	p->south_filename = NULL;
-	p->error_message = NULL;
-	p->map_content = NULL;
-	p->map = NULL;
-	p->file_buffer = NULL;
-	p->has_no = 0;
-	p->has_so = 0;
-	p->has_we = 0;
-	p->has_ea = 0;
-	p->has_ceiling = 0;
-	p->has_floor = 0;
-	p->position = 0;
-	p->x_coordinate = -1;
-	p->y_coordinate = -1;
-	p->set = 0;
-	return ;
 }
