@@ -6,37 +6,39 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 11:30:10 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/07/26 18:34:16 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:39:03 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-
 void	init_textures(t_data *data)
 {
-    data->north_img = mlx_xpm_file_to_image(data->mlx_ptr, data->north_filename,
-                    &data->tex_w, &data->tex_h);
-    if (!data->north_img)
-            exit_and_error(data);
-    data->south_img = mlx_xpm_file_to_image(data->mlx_ptr, data->south_filename,
-                    &data->tex_w, &data->tex_h);
-    if (!data->south_img)
-            exit_and_error(data);
-    data->east_img = mlx_xpm_file_to_image(data->mlx_ptr, data->east_filename,
-                    &data->tex_w, &data->tex_h);
-    if (!data->east_img)
-            exit_and_error(data);
-    data->west_img = mlx_xpm_file_to_image(data->mlx_ptr, data->west_filename,
-                    &data->tex_w, &data->tex_h);
-    if (!data->west_img)
-            exit_and_error(data);
-    return ;
+	data->north_img = mlx_xpm_file_to_image(data->mlx_ptr, data->north_filename,
+			&data->tex_w, &data->tex_h);
+	if (!data->north_img)
+		exit_and_error(data);
+	data->south_img = mlx_xpm_file_to_image(data->mlx_ptr, data->south_filename,
+			&data->tex_w, &data->tex_h);
+	if (!data->south_img)
+		exit_and_error(data);
+	data->east_img = mlx_xpm_file_to_image(data->mlx_ptr, data->east_filename,
+			&data->tex_w, &data->tex_h);
+	if (!data->east_img)
+		exit_and_error(data);
+	data->west_img = mlx_xpm_file_to_image(data->mlx_ptr, data->west_filename,
+			&data->tex_w, &data->tex_h);
+	if (!data->west_img)
+		exit_and_error(data);
+	return ;
 }
 
 void	create_window(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
+	data->img_ptr = mlx_new_image(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	data->addr = mlx_get_data_addr(data->img_ptr, &data->bits_per_pixel,
+			&data->line_length, &data->endian);
 	if (!data->mlx_ptr)
 	{
 		error_message("Error initializing mlx\n");
@@ -51,5 +53,6 @@ void	create_window(t_data *data)
 		free(data->mlx_ptr);
 		exit(EXIT_FAILURE);
 	}
+	mlx_loop_hook(data->mlx_ptr, rendering, data);
 	mlx_loop(data->mlx_ptr);
 }

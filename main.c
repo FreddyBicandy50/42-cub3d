@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:57:40 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/26 17:44:42 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/07/28 17:32:29 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	main(int argc, char **argv)
 	create_window(p);
 	init_textures(p);
 	cub3d_controls();
-	rendering(p);
+	mlx_loop_hook(p->mlx_ptr, rendering, p);
+	mlx_loop(p->mlx_ptr);
 	free_allocated(p);
 	return (0);
 }

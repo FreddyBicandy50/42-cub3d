@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 21:28:47 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/07/25 21:29:43 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:06:07 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_player(t_data **p)
 {
-	(*p)->player.dir = '\0';
+	(*p)->player_dir = '\0';
 }
 
 void	initialize_struct(t_data *p)

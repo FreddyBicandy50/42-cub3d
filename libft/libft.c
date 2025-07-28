@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:02:25 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/17 16:06:12 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:46:30 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,18 @@ char	*ft_strdup(char *str)
 int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*ptr;
+	int				i;
+
+	ptr = s;
+	i = 0;
+	while (i < (int)n)
+	{
+		ptr[i] = 0;
+		i++;
+	}
 }

@@ -6,15 +6,8 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 17:47:04 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/07/26 18:28:41 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/07/28 17:32:53 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int	rendering(t_data *data)
-{
-	(void)*data;
-	
-	return (0);
-}

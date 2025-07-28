@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:57:51 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/26 17:54:54 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:51:34 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,20 @@
 # include <string.h>
 # include <unistd.h>
 
+# define MOVMENT_SPEED 0.03
 # define BUFFER_SIZE 1024
 # define WIN_HEIGHT 1080
 # define WIN_WIDTH 1920
+# define ROT_SPEED 0.025
 
 typedef struct s_player
 {
-	char		dir;
-	int			has_moved;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
 }				t_player;
 
 typedef struct s_matrix
@@ -108,6 +114,7 @@ char			*ft_strchr(const char *s, int c);
 void			ft_strcpy(char *dest, char *src);
 char			*ft_strjoin(char *s1, char *s2);
 int				ft_strcmp(char *s1, char *s2);
+void			ft_bzero(void *s, size_t n);
 char			*ft_strrchr(char *s, int c);
 char			**ft_split(char *s, char c);
 int				ft_atoi(const char *nptr);
@@ -158,6 +165,7 @@ int				floorcolor(t_data *p, char *line);
 int				ceiling(t_data *p, char *line);
 
 // utils
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			init_player(t_data **p);
 void			initialize_struct(t_data *p);
 void			error_message(char *str);
