@@ -15,27 +15,23 @@
 
 void	init_textures(t_data *data)
 {
-	data->north_img = mlx_xpm_file_to_image(data->mlx_ptr, data->north_filename,
-			&data->tex_w, &data->tex_h);
-	if (!data->north_img)
-		exit_and_error(data);
-	data->south_img = mlx_xpm_file_to_image(data->mlx_ptr, data->south_filename,
-			&data->tex_w, &data->tex_h);
-	if (!data->south_img)
-		exit_and_error(data);
-	data->north_img = mlx_xpm_file_to_image(data->mlx_ptr, data->north_filename,
-			&data->tex_w, &data->tex_h);
-	if (!data->north_img)
-		exit_and_error(data);
-	data->east_img = mlx_xpm_file_to_image(data->mlx_ptr, data->east_filename,
-			&data->tex_w, &data->tex_h);
-	if (!data->north_img)
-		exit_and_error(data);
-	data->west_img = mlx_xpm_file_to_image(data->mlx_ptr, data->west_filename,
-			&data->tex_w, &data->tex_h);
-	if (!data->west_img)
-		exit_and_error(data);
-	return ;
+    data->north_img = mlx_xpm_file_to_image(data->mlx_ptr, data->north_filename,
+                    &data->tex_w, &data->tex_h);
+    if (!data->north_img)
+            exit_and_error(data);
+    data->south_img = mlx_xpm_file_to_image(data->mlx_ptr, data->south_filename,
+                    &data->tex_w, &data->tex_h);
+    if (!data->south_img)
+            exit_and_error(data);
+    data->east_img = mlx_xpm_file_to_image(data->mlx_ptr, data->east_filename,
+                    &data->tex_w, &data->tex_h);
+    if (!data->east_img)
+            exit_and_error(data);
+    data->west_img = mlx_xpm_file_to_image(data->mlx_ptr, data->west_filename,
+                    &data->tex_w, &data->tex_h);
+    if (!data->west_img)
+            exit_and_error(data);
+    return ;
 }
 
 void	create_window(t_data *data)
