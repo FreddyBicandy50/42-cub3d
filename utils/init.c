@@ -6,11 +6,29 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 21:28:47 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/07/28 16:06:07 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 21:50:50 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+t_cardinal_direction	ft_get_cardinal_direction(t_raycasting *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->ray_dir_x < 0)
+			return (WEST);
+		else
+			return (EAST);
+	}
+	else
+	{
+		if (ray->ray_dir_y < 0)
+			return (NORTH);
+		else
+			return (SOUTH);
+	}
+}
 
 void	init_player(t_data **p)
 {

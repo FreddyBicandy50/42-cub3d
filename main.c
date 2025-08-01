@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:57:40 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/28 17:32:29 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:25:49 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int	main(int argc, char **argv)
 		return (1);
 	initialize_struct(p);
 	p->map_filename = ft_strdup(argv[1]);
-	parse_map(p);
-	create_window(p);
-	init_textures(p);
+	parse_map(p);     // must come before window so map is loaded
+	create_window(p); // sets up window and image
+	init_textures(p); // loads texture images and buffers
 	cub3d_controls();
-	mlx_loop_hook(p->mlx_ptr, rendering, p);
-	mlx_loop(p->mlx_ptr);
+	mlx_loop_hook(p->mlx_ptr, render_loop, p); // render each frame
+	mlx_loop(p->mlx_ptr);                      // start the graphics loop
 	free_allocated(p);
 	return (0);
 }

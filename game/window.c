@@ -6,11 +6,54 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 11:30:10 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/07/28 16:39:03 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:20:46 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	set_player_start(t_data *p)
+{
+	char	dir;
+
+	if (p->x_coordinate < 0 || p->y_coordinate < 0)
+	{
+		p->error_message = "Player start position not found";
+		exit_and_error(p);
+	}
+	p->player.pos_x = p->y_coordinate + 0.5;
+	p->player.pos_y = p->x_coordinate + 0.5;
+	dir = p->map[p->x_coordinate][p->y_coordinate];
+	if (dir == 'N')
+	{
+		p->player.dir_x = 0;
+		p->player.dir_y = -1;
+		p->player.plane_x = 0.66;
+		p->player.plane_y = 0;
+	}
+	else if (dir == 'S')
+	{
+		p->player.dir_x = 0;
+		p->player.dir_y = 1;
+		p->player.plane_x = -0.66;
+		p->player.plane_y = 0;
+	}
+	else if (dir == 'E')
+	{
+		p->player.dir_x = 1;
+		p->player.dir_y = 0;
+		p->player.plane_x = 0;
+		p->player.plane_y = 0.66;
+	}
+	else if (dir == 'W')
+	{
+		p->player.dir_x = -1;
+		p->player.dir_y = 0;
+		p->player.plane_x = 0;
+		p->player.plane_y = -0.66;
+	}
+	p->map[p->x_coordinate][p->y_coordinate] = '0';
+}
 
 void	init_textures(t_data *data)
 {
@@ -30,6 +73,10 @@ void	init_textures(t_data *data)
 			&data->tex_w, &data->tex_h);
 	if (!data->west_img)
 		exit_and_error(data);
+	data->north_img = mlx_xpm_file_to_image(data->mlx_ptr, data->north_filename,
+			&data->tex_w, &data->tex_h);
+	data->north_buf = (int *)mlx_get_data_addr(data->north_img,
+			&data->bits_per_pixel, &data->line_length, &data->endian);
 	return ;
 }
 
@@ -53,6 +100,4 @@ void	create_window(t_data *data)
 		free(data->mlx_ptr);
 		exit(EXIT_FAILURE);
 	}
-	mlx_loop_hook(data->mlx_ptr, rendering, data);
-	mlx_loop(data->mlx_ptr);
 }
