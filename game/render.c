@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 17:47:04 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/01 22:17:16 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:48:13 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ void	draw_wall_column(t_data *data, t_raycasting *ray, int x)
 	if ((ray->side == 0 && ray->ray_dir_x < 0) || (ray->side == 1
 			&& ray->ray_dir_y > 0))
 		ray->tex_x = TEXTURE_SIZE - ray->tex_x - 1;
-
 	step = 1.0 * TEXTURE_SIZE / ray->line_height;
 	pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
-
 	if (dir == NORTH)
 		tex = data->north_buf;
 	else if (dir == SOUTH)
@@ -39,7 +37,6 @@ void	draw_wall_column(t_data *data, t_raycasting *ray, int x)
 		tex = data->west_buf;
 	else
 		tex = data->east_buf;
-
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
@@ -189,11 +186,34 @@ int	raycast(t_data *p)
 	return (0);
 }
 
-int render_loop(void *param)
+int	render_loop(void *param)
 {
 	t_data *data = (t_data *)param;
+	int x, y;
+	int ceiling_color;
+	int floor_color;
 
+	// Convert RGB strings to integers
+	ceiling_color = rgb_to_int(data->ceiling_color);
+	floor_color = rgb_to_int(data->floor_color);
+
+	// Clear the image with floor and ceiling colors
+	for (y = 0; y < WIN_HEIGHT; y++)
+	{
+		for (x = 0; x < WIN_WIDTH; x++)
+		{
+			if (y < WIN_HEIGHT / 2)
+				my_mlx_pixel_put(data, x, y, ceiling_color);
+			else
+				my_mlx_pixel_put(data, x, y, floor_color);
+		}
+	}
+
+	// Then draw walls
 	raycast(data);
+
+	// Put image to window
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+
 	return (0);
 }

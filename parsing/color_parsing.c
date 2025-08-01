@@ -6,11 +6,25 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:13:28 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/17 16:06:12 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:37:37 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int rgb_to_int(char *rgb_string)
+{
+    char **colors;
+    int r, g, b;
+    
+    colors = ft_split(rgb_string, ',');
+    r = ft_atoi(colors[0]);
+    g = ft_atoi(colors[1]);
+    b = ft_atoi(colors[2]);
+    free_2d_array(colors);
+    
+    return ((r << 16) | (g << 8) | b);
+}
 
 int	check_char_color(char **colors)
 {

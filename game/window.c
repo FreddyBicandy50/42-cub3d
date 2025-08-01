@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 11:30:10 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/01 22:20:46 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:36:27 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ void	init_textures(t_data *data)
 	data->north_img = mlx_xpm_file_to_image(data->mlx_ptr, data->north_filename,
 			&data->tex_w, &data->tex_h);
 	data->north_buf = (int *)mlx_get_data_addr(data->north_img,
+			&data->bits_per_pixel, &data->line_length, &data->endian);
+	data->south_buf = (int *)mlx_get_data_addr(data->south_img,
+			&data->bits_per_pixel, &data->line_length, &data->endian);
+	data->east_buf = (int *)mlx_get_data_addr(data->east_img,
+			&data->bits_per_pixel, &data->line_length, &data->endian);
+	data->west_buf = (int *)mlx_get_data_addr(data->west_img,
 			&data->bits_per_pixel, &data->line_length, &data->endian);
 	return ;
 }

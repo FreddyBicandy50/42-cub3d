@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:18:26 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/17 16:06:12 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:46:41 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 int	north(t_data *p, char *line)
 {
 	int	i;
+	int	start;
 	int	len;
 	int	fd;
 
 	p->has_no = 1;
-	len = 0;
 	i = 3;
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	while (line[i] != '\0')
-	{
-		len++;
+	start = i;
+	while (line[i] != '\0' && line[i] != ' ' && line[i] != '\t')
 		i++;
-	}
-	p->north_filename = ft_substr(line, 3, len);
+	len = i - start;
+	p->north_filename = ft_substr(line, start, len);
+	trimwhitespace_str(p->north_filename); // Trim any remaining whitespace
 	fd = open(p->north_filename, O_RDONLY);
 	if (fd == -1)
 	{
@@ -39,6 +39,7 @@ int	north(t_data *p, char *line)
 	return (1);
 }
 
+/* Apply the same fix to south(), east(), and west() functions - same pattern */
 int	south(t_data *p, char *line)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:57:51 by adahroug          #+#    #+#             */
-/*   Updated: 2025/08/01 22:13:47 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:50:14 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int						raycast(t_data *p);
 int						render_loop(void *param);
 
 // window
+void					set_player_start(t_data *p);
 void					init_textures(t_data *data);
 void					create_window(t_data *data);
 
@@ -185,6 +186,7 @@ void					trimwhitespace_str(char *line);
 void					set_x_coordinate(t_data *p, int i);
 
 // color_parsing
+int						rgb_to_int(char *rgb_string);
 int						check_color(char *color, t_data *p);
 int						recheck_colors(char **colors);
 int						handle_color(char **colors, t_data *p);

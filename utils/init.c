@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 21:28:47 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/01 21:50:50 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:47:00 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,15 @@ void	initialize_struct(t_data *p)
 	p->west_filename = NULL;
 	p->north_filename = NULL;
 	p->south_filename = NULL;
+	// Add these initializations:
+	p->north_img = NULL;
+	p->south_img = NULL;
+	p->east_img = NULL;
+	p->west_img = NULL;
+	p->north_buf = NULL;
+	p->south_buf = NULL;
+	p->east_buf = NULL;
+	p->west_buf = NULL;
+	p->img_ptr = NULL;
+	p->addr = NULL;
 }

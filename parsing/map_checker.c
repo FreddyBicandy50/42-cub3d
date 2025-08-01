@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 19:49:29 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/17 16:06:12 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:51:14 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,14 @@ int	check_row_map(char *line, t_data *p)
 
 int	check_char_map(t_data *p, char *line, int *i)
 {
-	if (line[*i] != '1' && line[*i] != '0' && line[*i] != 'N'
-		&& line[*i] != 'S' && line[*i] != 'W' && line[*i] != 'E')
+	if (line[*i] != '1' && line[*i] != '0' && line[*i] != 'N' && line[*i] != 'S'
+		&& line[*i] != 'W' && line[*i] != 'E')
 		return (0);
-	if (line[*i] == 'N' || line[*i] == 'S'
-		|| line[*i] == 'W' || line[*i] == 'E')
+	if (line[*i] == 'N' || line[*i] == 'S' || line[*i] == 'W'
+		|| line[*i] == 'E')
 	{
 		p->y_coordinate = *i;
+		// Don't store it here - we'll use the map directly
 		p->position++;
 	}
 	return (1);
