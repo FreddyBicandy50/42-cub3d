@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:57:40 by adahroug          #+#    #+#             */
-/*   Updated: 2025/08/01 22:49:38 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 23:01:06 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ int	main(int argc, char **argv)
 	parse_map(data);
 	create_window(data);
 	init_textures(data);
+	data->ceiling_rgb = rgb_to_int(data->ceiling_color);
+	data->floor_rgb = rgb_to_int(data->floor_color);
+
 	// Add after init_textures(data); in main.c
 	printf("Debug: Texture loading status:\n");
 	printf("North: %p (file: %s)\n", data->north_img, data->north_filename);

@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 17:47:04 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/01 22:48:13 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 23:07:19 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ int	raycast(t_data *p)
 {
 	int				x;
 	t_raycasting	raycast;
+	int				y;
 
 	x = 0;
 	while (x < WIN_WIDTH)
@@ -180,6 +181,22 @@ int	raycast(t_data *p)
 		calculate_step_and_side(&raycast, p);
 		calculate_dda(p, &raycast);
 		calculate_wall_height(&raycast, p);
+		y = 0;
+		// Draw ceiling
+		while (y < raycast.draw_start)
+		{
+			my_mlx_pixel_put(p, x, y, p->ceiling_rgb);
+			y++;
+		}
+		// Draw wall
+		draw_wall_column(p, &raycast, x);
+		// Draw floor
+		y = raycast.draw_end;
+		while (y < WIN_HEIGHT)
+		{
+			my_mlx_pixel_put(p, x, y, p->floor_rgb);
+			y++;
+		}
 		draw_wall_column(p, &raycast, x);
 		x++;
 	}

@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:57:51 by adahroug          #+#    #+#             */
-/*   Updated: 2025/08/01 22:50:14 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:58:21 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ typedef struct s_matrix
 
 typedef struct s_data
 {
+	int					floor_rgb;
+	int					ceiling_rgb;
+
 	int					*east_buf;
 	int					*west_buf;
 	int					*north_buf;
