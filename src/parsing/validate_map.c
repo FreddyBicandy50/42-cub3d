@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 22:36:12 by hshehab           #+#    #+#             */
-/*   Updated: 2025/08/05 17:35:10 by fbicandy         ###   ########.fr       */
+/*   Created: 2025/08/06 00:13:51 by fbicandy          #+#    #+#             */
+/*   Updated: 2025/08/06 00:42:46 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/cub3d.h"
 
@@ -42,22 +43,6 @@ char	**copy_map(char **src, int height)
 	return (copy);
 }
 
-void	print_char_matrix(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	if (matrix == NULL)
-	{
-		printf("Matrix is NULL.\n");
-		return ;
-	}
-	while (matrix[i])
-	{
-		printf("%s\n", matrix[i]);
-		i++;
-	}
-}
 
 int	flood_fill(char **map, int x, int y, t_data *game)
 {

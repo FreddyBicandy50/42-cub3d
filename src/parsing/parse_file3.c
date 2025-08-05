@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/04 15:16:19 by ldarsa            #+#    #+#             */
-/*   Updated: 2025/08/05 17:34:49 by fbicandy         ###   ########.fr       */
+/*   Created: 2025/08/06 00:13:35 by fbicandy          #+#    #+#             */
+/*   Updated: 2025/08/06 02:20:48 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/cub3d.h"
 
@@ -33,7 +34,6 @@ void	parse_config(t_data *game, char *line)
 	char	**splitted;
 
 	splitted = ft_split(line, ' ');
-	printf("%s\n", line);
 	free(line);
 	if (!splitted || !splitted[0] || !splitted[1] || splitted[2])
 		error_exit_matrix(game, splitted,

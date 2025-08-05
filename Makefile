@@ -20,6 +20,12 @@ SRCS = main.c \
 	gnl/get_next_line.c \
 	\
 	src/render/window.c \
+	src/render/handle_keys.c \
+	src/render/handle_movements.c \
+	src/render/handle_rotations.c \
+	src/render/player.c \
+	src/render/textures.c \
+	src/render/calculations.c \
 	src/render/rendering.c \
 	\
 	src/libft/ft_atoi.c \

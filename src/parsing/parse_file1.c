@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/04 15:11:18 by ldarsa            #+#    #+#             */
-/*   Updated: 2025/08/05 17:34:38 by fbicandy         ###   ########.fr       */
+/*   Created: 2025/08/06 00:13:24 by fbicandy          #+#    #+#             */
+/*   Updated: 2025/08/06 01:39:49 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/cub3d.h"
 
@@ -27,7 +28,6 @@ int	valid_file_extension(char *filename, char *ext)
 {
 	size_t	len_filename;
 	size_t	len_ext;
-	// int		fd;
 
 	if (!filename || !ext)
 		return (0);
