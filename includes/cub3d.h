@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:33:28 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/05 23:05:39 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/05 23:58:27 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # ifndef DEFINES_H
 #  define DEFINES_H
 
-#  define WIN_WIDTH 960
-#  define WIN_HEIGHT 720
+#  define WIN_WIDTH 1920
+#  define WIN_HEIGHT 1080
 #  define KEY_ESC 65307
 #  define KEY_W 119
 #  define KEY_A 97
@@ -40,9 +40,19 @@
 #  define COLOR_FLOOR 0x222222
 #  define COLOR_CEILING 0x888888
 
-#  define MOVE_SPEED 0.05
-#  define ROT_SPEED 0.04
+#  define MOVE_SPEED 0.01
+#  define ROT_SPEED 0.01
 # endif
+
+typedef struct s_input
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
+}				t_input;
 
 // ----------------------
 // RGB Color
@@ -59,12 +69,14 @@ typedef struct s_color
 typedef struct s_texture
 {
 	void		*img_ptr;
-	char		*img_data;
+
+	int			bpp;
 	int			width;
 	int			height;
-	int			bpp;
-	int			line_len;
 	int			endian;
+	int			line_len;
+
+	char		*img_data;
 }				t_texture;
 // ----------------------
 // Configuration Info from .cub
@@ -75,7 +87,9 @@ typedef struct s_config
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
+
 	t_texture	textures[4];
+
 	t_color		floor;
 	t_color		ceiling;
 }				t_config;
@@ -84,9 +98,10 @@ typedef struct s_config
 // ----------------------
 typedef struct s_map
 {
-	char		**grid;
 	int			width;
 	int			height;
+
+	char		**grid;
 }				t_map;
 // ----------------------
 // Player Info
@@ -105,44 +120,46 @@ typedef struct s_player
 // ----------------------
 typedef struct s_ray
 {
-	double		dir_x;
-	double		dir_y;
+	int			tex_x;
+	int			side;
 	int			map_x;
 	int			map_y;
 	int			step_x;
 	int			step_y;
-	double		side_dist_x;
-	double		side_dist_y;
+	int			draw_end;
+	int			draw_start;
+	int			line_height;
+
+	double		dir_x;
+	double		dir_y;
+	double		wall_x;
 	double		delta_x;
 	double		delta_y;
-	int			side;
-
-	// Add these 👇 to fix render logic
 	double		wall_dist;
-	int			line_height;
-	int			draw_start;
-	int			draw_end;
-	double		wall_x;
-	int			tex_x;
+	double		side_dist_y;
+	double		side_dist_x;
 }				t_ray;
 
 typedef struct s_data
 {
-	int			fd;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
-	char		*img_data;
+
+	int			fd;
 	int			bpp;
-	int			line_len;
 	int			endian;
-	t_config	config;
+	int			line_len;
+
+	char		*img_data;
+
 	t_map		map;
+	t_input		input;
+	t_config	config;
 	t_player	player;
 }				t_data;
 
-
-
+void			update_controls(t_data *data);
 void			find_player_start(t_data *data);
 void			set_player_start(t_data *data, int i, int j);
 char			*get_next_line(int fd);

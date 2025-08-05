@@ -6,12 +6,11 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 19:53:15 by hshehab           #+#    #+#             */
-/*   Updated: 2025/08/05 21:31:17 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/05 23:55:48 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
 
 void	free_matrix(char **matrix)
 {
@@ -56,24 +55,30 @@ void	init_config(t_data *game)
 	}
 }
 
-void	init_data(t_data *game)
+void	init_data(t_data *data)
 {
-	game->fd = -1;
-	game->mlx_ptr = NULL;
-	game->win_ptr = NULL;
-	game->img_ptr = NULL;
-	game->img_data = NULL;
-	game->bpp = 0;
-	game->line_len = 0;
-	game->endian = 0;
-	init_config(game);
-	game->map.grid = NULL;
-	game->map.width = 0;
-	game->map.height = 0;
-	game->player.x = 0;
-	game->player.y = 0;
-	game->player.dir_x = 0;
-	game->player.dir_y = 0;
-	game->player.plane_x = 0;
-	game->player.plane_y = 0;
+	data->input.w = 0;
+	data->input.a = 0;
+	data->input.s = 0;
+	data->input.d = 0;
+	data->input.left = 0;
+	data->input.right = 0;
+	data->fd = -1;
+	data->mlx_ptr = NULL;
+	data->win_ptr = NULL;
+	data->img_ptr = NULL;
+	data->img_data = NULL;
+	data->bpp = 0;
+	data->line_len = 0;
+	data->endian = 0;
+	init_config(data);
+	data->map.grid = NULL;
+	data->map.width = 0;
+	data->map.height = 0;
+	data->player.x = 0;
+	data->player.y = 0;
+	data->player.dir_x = 0;
+	data->player.dir_y = 0;
+	data->player.plane_x = 0;
+	data->player.plane_y = 0;
 }

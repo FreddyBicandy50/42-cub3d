@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 11:30:10 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/05 23:10:50 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/06 00:02:55 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,29 +61,6 @@ void	set_player_start(t_data *data, int row, int col)
 		data->player.plane_y = 0.66;
 	}
 	data->map.grid[row][col] = '0';
-}
-
-void	init_textures(t_data *data)
-{
-	char	**paths;
-	int		i;
-
-	paths = (char *[]){data->config.no_path, data->config.so_path,
-		data->config.we_path, data->config.ea_path};
-	i = 0;
-	while (i < 4)
-	{
-		data->config.textures[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-				paths[i], &data->config.textures[i].width,
-				&data->config.textures[i].height);
-		if (!data->config.textures[i].img_ptr)
-			exit(EXIT_FAILURE);
-		data->config.textures[i].img_data = mlx_get_data_addr(data->config.textures[i].img_ptr,
-				&data->config.textures[i].bpp,
-				&data->config.textures[i].line_len,
-				&data->config.textures[i].endian);
-		i++;
-	}
 }
 
 void	create_window(t_data *data)

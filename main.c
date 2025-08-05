@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 20:25:50 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/05 22:55:42 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/06 00:02:27 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,23 +175,98 @@ void	find_player_start(t_data *data)
 	exit(1);
 }
 
+int	handle_key_release(int keycode, t_data *data)
+{
+	if (keycode == 'w')
+		data->input.w = 0;
+	else if (keycode == 'a')
+		data->input.a = 0;
+	else if (keycode == 's')
+		data->input.s = 0;
+	else if (keycode == 'd')
+		data->input.d = 0;
+	else if (keycode == 65361)
+		data->input.left = 0;
+	else if (keycode == 65363)
+		data->input.right = 0;
+	return (0);
+}
+
 int	handle_key(int keycode, t_data *data)
 {
 	if (keycode == 65307)
 		close_window(data);
 	else if (keycode == 'w')
-		move_forward(data);
-	else if (keycode == 's')
-		move_backward(data);
+		data->input.w = 1;
 	else if (keycode == 'a')
-		move_left(data);
+		data->input.a = 1;
+	else if (keycode == 's')
+		data->input.s = 1;
 	else if (keycode == 'd')
-		move_right(data);
+		data->input.d = 1;
 	else if (keycode == 65361)
-		rotate_left(data);
+		data->input.left = 1;
 	else if (keycode == 65363)
-		rotate_right(data);
+		data->input.right = 1;
 	return (0);
+}
+void	update_controls(t_data *data)
+{
+	if (data->input.w && !data->input.s)
+		move_forward(data);
+	else if (data->input.s && !data->input.w)
+		move_backward(data);
+	if (data->input.a && !data->input.d)
+		move_left(data);
+	else if (data->input.d && !data->input.a)
+		move_right(data);
+	if (data->input.left && !data->input.right)
+		rotate_left(data);
+	else if (data->input.right && !data->input.left)
+		rotate_right(data);
+}
+
+
+
+void	init_textures(t_data *data)
+{
+	char		*paths[4];
+	t_texture	*tex;
+	int			i;
+
+	paths[0] = data->config.no_path;
+	paths[1] = data->config.so_path;
+	paths[2] = data->config.we_path;
+	paths[3] = data->config.ea_path;
+
+	i = 0;
+	while (i < 4)
+	{
+		tex = &data->config.textures[i];
+		tex->img_ptr = mlx_xpm_file_to_image(
+			data->mlx_ptr,
+			paths[i],
+			&tex->width,
+			&tex->height
+		);
+		if (!tex->img_ptr)
+		{
+			ft_putstr_fd("Error\nFailed to load texture image\n", 2);
+			exit(EXIT_FAILURE);
+		}
+		tex->img_data = mlx_get_data_addr(
+			tex->img_ptr,
+			&tex->bpp,
+			&tex->line_len,
+			&tex->endian
+		);
+		if (!tex->img_data)
+		{
+			ft_putstr_fd("Error\nFailed to access texture pixel data\n", 2);
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -215,36 +290,39 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error\nFailed to open file\n", 2);
 		return (1);
 	}
-	
+
 	// Parse the file first
 	parse_cub_file(&game, game.fd);
 	close(game.fd);
-	
 	// Print debug info BEFORE finding player
 	printf("DEBUG: After parsing, before finding player:\n");
 	printf("Player at: x=%.2f y=%.2f\n", game.player.x, game.player.y);
 	printf("Direction : x=%.2f y=%.2f\n", game.player.dir_x, game.player.dir_y);
-	printf("Plane     : x=%.2f y=%.2f\n", game.player.plane_x, game.player.plane_y);
-	
+	printf("Plane     : x=%.2f y=%.2f\n", game.player.plane_x,
+		game.player.plane_y);
+
 	// Print the map to verify it's loaded correctly
 	print_map(&game.map);
-	
+
 	// Find and set the player position
 	find_player_start(&game);
-	
+
 	// Print debug info AFTER finding player
 	printf("DEBUG: After finding player:\n");
 	printf("Player at: x=%.2f y=%.2f\n", game.player.x, game.player.y);
 	printf("Direction : x=%.2f y=%.2f\n", game.player.dir_x, game.player.dir_y);
-	printf("Plane     : x=%.2f y=%.2f\n", game.player.plane_x, game.player.plane_y);
+	printf("Plane     : x=%.2f y=%.2f\n", game.player.plane_x,
+		game.player.plane_y);
 
 	create_window(&game);
-	
+	init_textures(&game); // ✅ XPMs are loaded here
+
 	mlx_loop_hook(game.mlx_ptr, render_loop, &game);
-	mlx_hook(game.win_ptr, 2, 1L << 0, handle_key, &game);
+	mlx_hook(game.win_ptr, 3, 1L << 1, handle_key_release, &game); // key up
+	mlx_hook(game.win_ptr, 2, 1L << 0, handle_key, &game);         // key down
 	mlx_hook(game.win_ptr, 17, 0, close_window, &game);
 	mlx_loop(game.mlx_ptr);
-	
+
 	free_game(&game);
 	return (0);
 }

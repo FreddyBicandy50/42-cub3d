@@ -6,76 +6,61 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 17:47:04 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/05 23:23:29 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/06 00:03:12 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// void	draw_wall_column(t_data *data, t_ray *ray, int x)
-// {
-// 	int			y;
-// 	double		step;
-// 	double		pos;
-// 	int			tex_y;
-// 	int			color;
-// 	int			tex_index;
-// 	t_texture	*tex;
-// 	int			*texture;
-
-// 	if (ray->side == 0)
-// 	{
-// 		if (ray->dir_x < 0)
-// 			tex_index = 0;
-// 		else
-// 			tex_index = 1;
-// 	}
-// 	else
-// 	{
-// 		if (ray->dir_y < 0)
-// 			tex_index = 2;
-// 		else
-// 			tex_index = 3;
-// 	}
-// 	tex = &data->config.textures[tex_index];
-// 	if (!tex || !tex->img_data)
-// 	{
-// 		ft_putstr_fd("Error\nMissing texture data\n", 2);
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	texture = (int *)tex->img_data;
-// 	ray->tex_x = (int)(ray->wall_x * tex->width);
-// 	if ((ray->side == 0 && ray->dir_x < 0) || (ray->side == 1
-// 			&& ray->dir_y > 0))
-// 		ray->tex_x = tex->width - ray->tex_x - 1;
-// 	step = (double)tex->height / ray->line_height;
-// 	pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
-// 	y = ray->draw_start;
-// 	while (y < ray->draw_end)
-// 	{
-// 		tex_y = (int)pos;
-// 		pos += step;
-// 		color = texture[tex->width * tex_y + ray->tex_x];
-// 		printf("hello5");
-// 		exit(0);
-// 		my_mlx_pixel_put(data, x, y, color);
-// 		y++;
-// 	}
-// }
-
 void	draw_wall_column(t_data *data, t_ray *ray, int x)
 {
-	int	y;
-	int	color;
+	int			y;
+	double		step;
+	double		pos;
+	int			tex_y;
+	int			color;
+	int			tex_index;
+	t_texture	*tex;
+	int			*texture;
 
+	if (ray->side == 0)
+	{
+		if (ray->dir_x < 0)
+			tex_index = 0;
+		else
+			tex_index = 1;
+	}
+	else
+	{
+		if (ray->dir_y < 0)
+			tex_index = 2;
+		else
+			tex_index = 3;
+	}
+	tex = &data->config.textures[tex_index];
+	if (!tex || !tex->img_data)
+	{
+		ft_putstr_fd("Error\nMissing texture data\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	texture = (int *)tex->img_data;
+	ray->tex_x = (int)(ray->wall_x * tex->width);
+	if ((ray->side == 0 && ray->dir_x < 0) || (ray->side == 1
+			&& ray->dir_y > 0))
+		ray->tex_x = tex->width - ray->tex_x - 1;
+	step = (double)tex->height / ray->line_height;
+	pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		color = 0x00FF00; // green test wall
+		tex_y = (int)pos;
+		pos += step;
+		color = texture[tex->width * tex_y + ray->tex_x];
 		my_mlx_pixel_put(data, x, y, color);
 		y++;
 	}
 }
+
 
 void	calculate_wall_height(t_ray *r, t_data *d)
 {
@@ -209,6 +194,7 @@ int	render_loop(void *param)
 		}
 		y++;
 	}
+	update_controls(data);
 	raycast(data);
 	printf("DEBUG: After parsing, before finding player:\n");
 	printf("Player at: x=%.2f y=%.2f\n", data->player.x, data->player.y);
