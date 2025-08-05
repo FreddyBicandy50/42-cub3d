@@ -16,26 +16,26 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # Source files (manually listed)
 SRCS = main.c \
-	game/window.c \
-	game/render.c \
+	src/game/window.c \
+	src/game/render.c \
 	\
 	libft/libft.c \
 	libft/split.c \
 	libft/libft.utils.c \
 	\
-	parsing/parsing.c \
-	parsing/map_checker.c \
-	parsing/map_parsing.c \
-	parsing/parsing_utils.c \
-	parsing/color_parsing.c \
-	parsing/read_and_extract.c \
+	src/parsing/parsing.c \
+	src/parsing/map_checker.c \
+	src/parsing/map_parsing.c \
+	src/parsing/parsing_utils.c \
+	src/parsing/color_parsing.c \
+	src/parsing/read_and_extract.c \
 	\
-	utils/init.c \
-	utils/utils.c \
-	utils/colors.c \
-	utils/flood_fill.c \
-	utils/directions.c \
-	utils/copy_2darray.c \
+	src/utils/init.c \
+	src/utils/utils.c \
+	src/utils/colors.c \
+	src/utils/flood_fill.c \
+	src/utils/directions.c \
+	src/utils/copy_2darray.c \
 
 OBJ = $(SRCS:.c=.o)
 
@@ -59,6 +59,8 @@ fclean: clean
 	@echo "$(RED)Objects Cleaned Successfully$(RESET)"
 
 re: fclean all
-
+	@make clean
+	@clear
+	@echo "${GREEN}Recompiled Successfully${RESET}"
 .PHONY: all clean fclean re
 

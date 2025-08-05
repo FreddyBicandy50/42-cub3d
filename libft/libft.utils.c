@@ -6,11 +6,11 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 19:55:48 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/17 16:06:12 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/05 13:20:59 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/libft.h"
 
 int	compare_chars(const char *s1, const char *s2, size_t n)
 {

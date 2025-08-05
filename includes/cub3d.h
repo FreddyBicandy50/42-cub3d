@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:57:51 by adahroug          #+#    #+#             */
-/*   Updated: 2025/08/01 22:58:21 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/05 13:18:44 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "colors.h"
+# include "libft.h"
 # include <../.minilibx-linux/mlx.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -142,23 +143,6 @@ int						render_loop(void *param);
 void					set_player_start(t_data *p);
 void					init_textures(t_data *data);
 void					create_window(t_data *data);
-
-// libft
-int						ft_strncmp(const char *s1, const char *s2, size_t n);
-char					*ft_substr(char *s, unsigned int start, size_t len);
-char					*word_dup(const char *str, int start, int finish);
-int						count_words(const char *str, char c);
-char					*ft_strchr(const char *s, int c);
-void					ft_strcpy(char *dest, char *src);
-char					*ft_strjoin(char *s1, char *s2);
-int						ft_strcmp(char *s1, char *s2);
-void					ft_bzero(void *s, size_t n);
-char					*ft_strrchr(char *s, int c);
-char					**ft_split(char *s, char c);
-int						ft_atoi(const char *nptr);
-char					*ft_strdup(char *str);
-int						ft_strlen(char *str);
-int						ft_isdigit(int c);
 
 // parsing
 int						is_map(char *line);

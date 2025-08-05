@@ -6,11 +6,11 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:02:25 by adahroug          #+#    #+#             */
-/*   Updated: 2025/07/28 16:46:30 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/05 13:21:53 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/libft.h"
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -74,7 +74,6 @@ char	*ft_strdup(char *str)
 	s[j] = '\0';
 	return (s);
 }
-
 int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
