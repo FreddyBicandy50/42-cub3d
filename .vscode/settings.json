@@ -4,7 +4,14 @@
 		"cub3d.h": "c",
 		"mlx.h": "c",
 		"math.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"fcntl.h": "c",
+		"stdlib.h": "c",
+		"unistd.h": "c",
+		"keysym.h": "c",
+		"stdio.h": "c",
+		"string.h": "c",
+		"colors.h": "c"
 	},
 	"files.autoSave": "onFocusChange"
 }

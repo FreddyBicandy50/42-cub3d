@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 18:57:51 by adahroug          #+#    #+#             */
-/*   Updated: 2025/08/05 13:18:44 by fbicandy         ###   ########.fr       */
+/*   Created: 2025/08/05 17:33:28 by fbicandy          #+#    #+#             */
+/*   Updated: 2025/08/05 23:05:39 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,187 +24,173 @@
 # include <string.h>
 # include <unistd.h>
 
-# define TEXTURE_SIZE 64
-# define MOVMENT_SPEED 0.03
-# define BUFFER_SIZE 1024
-# define WIN_HEIGHT 1080
-# define WIN_WIDTH 1920
-# define ROT_SPEED 0.025
+# ifndef DEFINES_H
+#  define DEFINES_H
 
-typedef enum e_cardinal_direction
+#  define WIN_WIDTH 960
+#  define WIN_HEIGHT 720
+#  define KEY_ESC 65307
+#  define KEY_W 119
+#  define KEY_A 97
+#  define KEY_S 115
+#  define KEY_D 100
+#  define KEY_LEFT 65361
+#  define KEY_RIGHT 65363
+#  define BUFFER_SIZE 42
+#  define COLOR_FLOOR 0x222222
+#  define COLOR_CEILING 0x888888
+
+#  define MOVE_SPEED 0.05
+#  define ROT_SPEED 0.04
+# endif
+
+// ----------------------
+// RGB Color
+// ----------------------
+typedef struct s_color
 {
-	NORTH = 0,
-	SOUTH = 1,
-	WEST = 2,
-	EAST = 3
-}						t_cardinal_direction;
-
-typedef struct s_raycasting
+	int			r;
+	int			g;
+	int			b;
+}				t_color;
+// ----------------------
+// Texture Info (XPM images)
+// ----------------------
+typedef struct s_texture
 {
-	int					side;
-	int					map_x;
-	int					map_y;
-	int					tex_x;
-	int					step_x;
-	int					step_y;
-	int					draw_end;
-	int					draw_start;
-	int					line_height;
-	double				wall_x;
-	double				camera_x;
-	double				ray_dir_x;
-	double				ray_dir_y;
-	double				side_dist_x;
-	double				side_dist_y;
-	double				delta_dist_x;
-	double				delta_dist_y;
-	double				wall_dist;
-}						t_raycasting;
-
+	void		*img_ptr;
+	char		*img_data;
+	int			width;
+	int			height;
+	int			bpp;
+	int			line_len;
+	int			endian;
+}				t_texture;
+// ----------------------
+// Configuration Info from .cub
+// ----------------------
+typedef struct s_config
+{
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	t_texture	textures[4];
+	t_color		floor;
+	t_color		ceiling;
+}				t_config;
+// ----------------------
+// Map Data
+// ----------------------
+typedef struct s_map
+{
+	char		**grid;
+	int			width;
+	int			height;
+}				t_map;
+// ----------------------
+// Player Info
+// ----------------------
 typedef struct s_player
 {
-	double				pos_x;
-	double				pos_y;
-	double				dir_x;
-	double				dir_y;
-	double				plane_x;
-	double				plane_y;
-}						t_player;
-
-typedef struct s_matrix
+	double		x;
+	double		y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+}				t_player;
+// ----------------------
+// Raycasting & Game State
+// ----------------------
+typedef struct s_ray
 {
-	int					width;
-	int					height;
-	int					**matrix;
-}						t_matrix;
+	double		dir_x;
+	double		dir_y;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_x;
+	double		delta_y;
+	int			side;
+
+	// Add these 👇 to fix render logic
+	double		wall_dist;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	double		wall_x;
+	int			tex_x;
+}				t_ray;
 
 typedef struct s_data
 {
-	int					floor_rgb;
-	int					ceiling_rgb;
+	int			fd;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	char		*img_data;
+	int			bpp;
+	int			line_len;
+	int			endian;
+	t_config	config;
+	t_map		map;
+	t_player	player;
+}				t_data;
 
-	int					*east_buf;
-	int					*west_buf;
-	int					*north_buf;
-	int					*south_buf;
 
-	char				*addr;
-	void				*mlx_ptr;
-	void				*win_ptr;
-	void				*img_ptr;
 
-	int					color;
-	int					endian;
-	t_player			player;
-	int					line_length;
-	char				*player_dir;
-	int					bits_per_pixel;
-
-	char				*floor_color;
-	char				*east_filename;
-	char				*west_filename;
-	char				*ceiling_color;
-	char				*north_filename;
-	char				*south_filename;
-
-	void				*east_img;
-	void				*west_img;
-	void				*north_img;
-	void				*south_img;
-
-	int					fd;
-	char				**map;
-	ssize_t				bytes_read;
-	char				*file_buffer;
-	char				*map_filename;
-	char				**map_content;
-	char				*error_message;
-
-	int					tex_w;
-	int					tex_h;
-
-	int					set;
-	int					has_no;
-	int					has_so;
-	int					has_we;
-	int					has_ea;
-	int					position;
-	int					has_floor;
-	int					has_ceiling;
-	int					x_coordinate;
-	int					y_coordinate;
-}						t_data;
-
-// render.c
-int						raycast(t_data *p);
-int						render_loop(void *param);
-
-// window
-void					set_player_start(t_data *p);
-void					init_textures(t_data *data);
-void					create_window(t_data *data);
-
-// parsing
-int						is_map(char *line);
-int						open_map(t_data *p);
-int						read_map(t_data *p);
-void					parse_map(t_data *p);
-int						check_mapcontent(t_data *p);
-int						extract_mapcontent(t_data *p);
-int						parse_line(t_data *p, char *line);
-int						parse_line_utils(t_data *p, char *line);
-
-// map parsing
-int						validate_map(t_data *p);
-int						check_previous_line(t_data *p, char *line,
-							char *previous_line);
-int						check_next_line(t_data *p, char *line, char *next_line);
-int						check_column_map(char *line, t_data *p);
-int						check_row_map(char *line, t_data *p);
-int						process_map(char *line, t_data *p, int *len);
-int						check_char_map(t_data *p, char *line, int *i);
-int						is_correct_coordinate(t_data *p);
-int						recheck_mapwalls(t_data *p, char *line, int *len);
-
-// parsing utils
-int						check_texture(char *filename);
-void					copy_map(t_data *p, int map_start);
-void					trimwhitespace_str(char *line);
-void					set_x_coordinate(t_data *p, int i);
-
-// color_parsing
-int						rgb_to_int(char *rgb_string);
-int						check_color(char *color, t_data *p);
-int						recheck_colors(char **colors);
-int						handle_color(char **colors, t_data *p);
-int						check_char_color(char **colors);
-int						parse_line_colors(t_data *p, char *line);
-int						is_valid_color_format(char *line);
-// directions
-int						north(t_data *p, char *line);
-int						south(t_data *p, char *line);
-int						west(t_data *p, char *line);
-int						east(t_data *p, char *line);
-int						floorcolor(t_data *p, char *line);
-int						ceiling(t_data *p, char *line);
-
-// utils
-void					init_player(t_data **p);
-void					initialize_struct(t_data *p);
-void					error_message(char *str);
-void					free_2d_array(char **array);
-void					free_allocated(t_data *p);
-void					exit_and_error(t_data *p);
-void					initialize_struct(t_data *p);
-char					**malloc_2d_copy(char **src);
-t_cardinal_direction	ft_get_cardinal_direction(t_raycasting *ray);
-int						copy_map_lines(t_data *p, int map_start, int finish);
-void					my_mlx_pixel_put(t_data *data, int x, int y, int color);
-
-// floodfill
-int						is_out_of_bounds(char **map, int x, int y);
-int						is_invalid_tile(char tile);
-void					fill(char **map, int x, int y, int *error);
-int						flood_fill_check(t_data *p);
-char					**malloc_2d_copy(char **original);
+void			find_player_start(t_data *data);
+void			set_player_start(t_data *data, int i, int j);
+char			*get_next_line(int fd);
+void			parse_cub_file(t_data *game, int fd);
+void			free_given_file(t_data *game);
+int				valid_file_extension(char *filename, char *ext);
+void			free_matrix(char **matrix);
+void			parse_map(t_data *game, char *line);
+int				validate_map(t_data *game);
+void			parse_map(t_data *game, char *line);
+int				error_exit_matrix(t_data *game, char **matrix,
+					char *error_message);
+int				validate_map_walls(t_data *game);
+void			init_data(t_data *game);
+void			print_matrix(char **arr);
+void			free_game(t_data *game);
+int				is_direction(char *line);
+int				is_ceil_floor(char *line);
+int				valid_file_extension(char *filename, char *ex);
+void			parse_single_direction(char **dest_path, char **splitted,
+					t_data *game);
+void			parse_direction(t_data *game, char **splitted);
+int				count_commas(char *line);
+int				check_color_range(t_color color);
+void			parse_ceiling(t_data *game, char **splitted, char **split_rgb);
+void			parse_single_color(t_data *game, char **splitted,
+					char **split_rgb);
+void			check_digit(t_data *game, char **split_rgb, char **splitted);
+void			parse_rgb(t_data *game, char **splitted);
+void			parse_config(t_data *game, char *line);
+char			*replace_tabs_with_spaces(char *line);
+int				is_map(char *line);
+int				is_empty_line(char *line);
+int				error_exit_matrix_rgb(t_data *game, char **color, char **matrix,
+					char *error_message);
+int				error_exit_matrix(t_data *game, char **matrix,
+					char *error_message);
+int				error_exit(t_data *game, char *str, char *error_message);
+void			normalize_map_width(t_data *game);
+int				is_player_char(char c);
+int				is_fillable(char c);
+char			**copy_map(char **src, int height);
+void			print_char_matrix(char **matrix);
+int				flood_fill(char **map, int x, int y, t_data *game);
+int				validate_map_walls(t_data *game);
+char			*pad_line(const char *line, int target_width);
+void			normalize_map_width(t_data *game);
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			create_window(t_data *data);
+int				render_loop(void *param);
 #endif
