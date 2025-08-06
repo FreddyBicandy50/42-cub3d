@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:33:28 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/06 02:19:14 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/06 14:28:10 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "colors.h"
 # include "libft.h"
-# include <../.minilibx-linux/mlx.h>
+# include <../minilibx-linux/mlx.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>

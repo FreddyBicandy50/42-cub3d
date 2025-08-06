@@ -10,7 +10,7 @@ CFLAGS  = -Wall -Wextra -Werror -Iincludes -Iminilibx-linux
 NAME    = cub3d
 
 # MiniLibX
-MLX_DIR = .minilibx-linux
+MLX_DIR = minilibx-linux
 MLX_LIB = $(MLX_DIR)/libmlx.a
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
@@ -55,7 +55,7 @@ SRCS = main.c \
 
 OBJ = $(SRCS:.c=.o)
 
-all: $(NAME) clean
+all: $(NAME)
 
 $(NAME): $(MLX_LIB) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) -o $(NAME)
@@ -66,17 +66,11 @@ $(MLX_LIB):
 clean:
 	rm -rf $(OBJ)
 	$(MAKE) -C $(MLX_DIR) clean
-	@clear
-	@echo "${GREEN}Objects Complied Successfully${RESET}"
 
 fclean: clean
 	rm -f $(NAME)
-	@clear
-	@echo "$(RED)Objects Cleaned Successfully$(RESET)"
 
 re: fclean all
-	@make clean
-	@clear
-	@echo "${GREEN}Recompiled Successfully${RESET}"
+
 .PHONY: all clean fclean re
 
