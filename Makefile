@@ -17,7 +17,7 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 # Source files (manually listed)
 SRCS = main.c \
 	\
-	gnl/get_next_line.c \
+	get_next_line/get_next_line.c \
 	\
 	src/render/window.c \
 	src/render/handle_keys.c \
