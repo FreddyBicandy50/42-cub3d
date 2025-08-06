@@ -7,7 +7,7 @@ CC      = cc
 CFLAGS  = -Wall -Wextra -Werror -Iincludes -Iminilibx-linux
 
 # Executable name
-NAME    = cub3d
+NAME    = cub3D
 
 # MiniLibX
 MLX_DIR = minilibx-linux

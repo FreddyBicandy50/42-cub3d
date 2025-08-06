@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 17:47:04 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/06 01:01:48 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/06 18:55:08 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ int	render_loop(t_data *data)
 	}
 	update_controls(data);
 	raycast(data);
+	printf("x:%f, y:%f \n",data->player.x, data->player.y);
+	printf("dx:%f, dy:%f\n",data->player.dir_x, data->player.dir_y);
+	printf("px:%f, py:%f\n",data->player.plane_x, data->player.plane_y);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (0);
 }

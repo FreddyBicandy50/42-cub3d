@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 20:25:50 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/06 14:37:45 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/06 18:54:03 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,10 @@ int	main(int argc, char **argv)
 	}
 	parse_cub_file(&game, game.fd);
 	close(game.fd);
+	
 	print_controls();
 	run_game(game);
+
 	free_game(&game);
 	return (0);
 }

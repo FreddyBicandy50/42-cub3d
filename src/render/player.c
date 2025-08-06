@@ -6,7 +6,7 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 00:17:39 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/06 01:20:27 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:00:02 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	init_pos_ew(char dir, t_data **data)
 {
-	if (dir == 'N')
+	if (dir == 'E')
 	{
-		(*data)->player.dir_x = 0;
-		(*data)->player.dir_y = -1;
-		(*data)->player.plane_x = -0.66;
-		(*data)->player.plane_y = 0;
+		(*data)->player.dir_x = 1;
+		(*data)->player.dir_y = 0;
+		(*data)->player.plane_x = 0;
+		(*data)->player.plane_y = -0.66;
 	}
-	else if (dir == 'S')
+	else if (dir == 'W')
 	{
-		(*data)->player.dir_x = 0;
-		(*data)->player.dir_y = 1;
-		(*data)->player.plane_x = 0.66;
-		(*data)->player.plane_y = 0;
+		(*data)->player.dir_x = -1;
+		(*data)->player.dir_y = 0;
+		(*data)->player.plane_x = 0;
+		(*data)->player.plane_y = 0.66;
 	}
 }
 
