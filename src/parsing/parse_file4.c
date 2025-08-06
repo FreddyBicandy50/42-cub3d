@@ -6,10 +6,9 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 00:13:39 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/06 00:13:39 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/06 14:32:58 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/cub3d.h"
 
@@ -48,7 +47,6 @@ int	is_empty_line(char *line)
 
 	if (!line || line[0] == '\0')
 		return (1);
-
 	i = 0;
 	while (line[i])
 	{
@@ -58,7 +56,6 @@ int	is_empty_line(char *line)
 	}
 	return (1);
 }
-
 
 int	is_map(char *line)
 {

@@ -6,10 +6,9 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 00:13:24 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/06 01:39:49 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/06 14:35:10 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/cub3d.h"
 
@@ -40,8 +39,7 @@ int	valid_file_extension(char *filename, char *ext)
 	return (0);
 }
 
-void	parse_single_direction(char **dest_path, char **splitted,
-		t_data *game)
+void	parse_single_direction(char **dest_path, char **splitted, t_data *game)
 {
 	if (*dest_path)
 		error_exit_matrix(game, splitted, "ERROR\nDUPLICATE PATH");

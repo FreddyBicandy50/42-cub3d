@@ -6,10 +6,9 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 00:13:51 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/06 00:42:46 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/06 14:35:25 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/cub3d.h"
 
@@ -42,7 +41,6 @@ char	**copy_map(char **src, int height)
 	copy[i] = NULL;
 	return (copy);
 }
-
 
 int	flood_fill(char **map, int x, int y, t_data *game)
 {

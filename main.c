@@ -6,22 +6,17 @@
 /*   By: fbicandy <fbicandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 20:25:50 by fbicandy          #+#    #+#             */
-/*   Updated: 2025/08/06 01:12:59 by fbicandy         ###   ########.fr       */
+/*   Updated: 2025/08/06 14:37:45 by fbicandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-void	init_textures(t_data *data)
+void	save_text(t_data *data, char *paths[4])
 {
-	char		*paths[4];
-	t_texture	*tex;
 	int			i;
+	t_texture	*tex;
 
-	paths[0] = data->config.no_path;
-	paths[1] = data->config.so_path;
-	paths[2] = data->config.we_path;
-	paths[3] = data->config.ea_path;
 	i = 0;
 	while (i < 4)
 	{
@@ -44,9 +39,48 @@ void	init_textures(t_data *data)
 	}
 }
 
+void	init_textures(t_data *data)
+{
+	char	*paths[4];
+
+	paths[0] = data->config.no_path;
+	paths[1] = data->config.so_path;
+	paths[2] = data->config.we_path;
+	paths[3] = data->config.ea_path;
+	save_text(data, paths);
+}
+
+void	run_game(t_data game)
+{
+	find_player_start(&game);
+	create_window(&game);
+	init_textures(&game);
+	mlx_loop_hook(game.mlx_ptr, render_loop, &game);
+	mlx_hook(game.win_ptr, 3, 1L << 1, handle_key_release, &game);
+	mlx_hook(game.win_ptr, 2, 1L << 0, handle_key, &game);
+	mlx_hook(game.win_ptr, 17, 0, close_window, &game);
+	mlx_loop(game.mlx_ptr);
+}
+
+static void	print_controls(void)
+{
+	printf(CYAN "\n");
+	printf("░█▀▀░█░█░█▀▄░▀▀█░█▀▄░░░█▀▀░█▀█░█▀█░▀█▀░█▀▄░█▀█░█░░░█▀▀\n");
+	printf("░█░░░█░█░█▀▄░░▀▄░█░█░░░█░░░█░█░█░█░░█░░█▀▄░█░█░█░░░▀▀█\n");
+	printf("░▀▀▀░▀▀▀░▀▀░░▀▀░░▀▀░░░░▀▀▀░▀▀▀░▀░▀░░▀░░▀░▀░▀▀▀░▀▀▀░▀▀▀\n");
+	printf(RESET "\n");
+	printf(CYAN "\tW" RESET ": move forward\t");
+	printf(CYAN "\tS" RESET ": move backward\n");
+	printf(CYAN "\tA" RESET ": strafe left\t");
+	printf(CYAN "\tD" RESET ": strafe right\n");
+	printf(CYAN "\t<" RESET ": rotate left\t");
+	printf(CYAN "\t>" RESET ": rotate right\n");
+	printf("\n");
+}
+
 int	main(int argc, char **argv)
 {
-	t_data game;
+	t_data	game;
 
 	if (argc != 2)
 	{
@@ -65,21 +99,10 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error\nFailed to open file\n", 2);
 		return (1);
 	}
-
 	parse_cub_file(&game, game.fd);
 	close(game.fd);
-
-	find_player_start(&game);
-
-	create_window(&game);
-	init_textures(&game);
-
-	mlx_loop_hook(game.mlx_ptr, render_loop, &game);
-	mlx_hook(game.win_ptr, 3, 1L << 1, handle_key_release, &game);
-	mlx_hook(game.win_ptr, 2, 1L << 0, handle_key, &game);
-	mlx_hook(game.win_ptr, 17, 0, close_window, &game);
-	mlx_loop(game.mlx_ptr);
-
+	print_controls();
+	run_game(game);
 	free_game(&game);
 	return (0);
 }
