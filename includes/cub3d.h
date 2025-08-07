@@ -15,7 +15,7 @@
 
 # include "colors.h"
 # include "libft.h"
-# include <../minilibx-linux/mlx.h>
+# include "mlx.h"
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
